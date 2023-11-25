@@ -1,3 +1,4 @@
+// Function to move the background down
 function moveBackgroundDown() {
     const dayBackground = document.getElementById('dayBackground');
     const nightBackground = document.getElementById('nightBackground');
@@ -6,6 +7,7 @@ function moveBackgroundDown() {
     nightBackground.style.animation = 'moveDown 1s forwards';
 }
 
+// Function to set the day/night background based on server status
 function setDayNightBackground(isOnline) {
     console.log('Setting background. Server online status:', isOnline);
 
@@ -23,14 +25,14 @@ function setDayNightBackground(isOnline) {
     }
 }
 
-function setInitialBackground() {
-    console.log('Setting initial background...');
-
-    const ipAddress = 'Survivetime.org';
+// Function to check server status
+function checkServerStatus() {
+    const ipAddress = 'Survivetime.org'; // Domain
     const apiUrl = `https://api.mcsrvstat.us/2/${ipAddress}`;
     const statusElement = document.getElementById('status');
     const loader = document.getElementById('loader');
 
+    // Display loader while checking server status
     loader.style.display = 'inline-block';
 
     fetch(apiUrl)
@@ -42,29 +44,35 @@ function setInitialBackground() {
             }
         })
         .then(data => {
-            console.log('Server status response:', data);
+            const isOnline = data.online !== undefined ? data.online : false; // Ensure the correct field is used
 
-            statusElement.textContent = data.online ? 'Server is online' : 'Server is offline';
-            setDayNightBackground(data.online);
+            console.log('Server is online:', isOnline);
 
-            if (data.online) {
+            // Set day/night background based on server status
+            setDayNightBackground(isOnline);
+
+            // Move background down if the server is online
+            if (isOnline) {
                 moveBackgroundDown();
             }
+
+            // Hide loader after checking server status
+            loader.style.display = 'none';
         })
         .catch(error => {
             console.error(error);
             statusElement.textContent = 'Error checking server status';
-        })
-        .finally(() => {
+
+            // Hide loader in case of an error
             loader.style.display = 'none';
         });
 }
 
 // Initial background check on page load
-setInitialBackground();
+checkServerStatus();
 
 // Subsequent background checks every 5 seconds
 setInterval(() => {
     console.log('Checking server status...');
-    setInitialBackground();
+    checkServerStatus();
 }, 5000);
