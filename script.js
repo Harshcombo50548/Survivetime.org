@@ -48,6 +48,9 @@ function checkServerStatus() {
 
             console.log('Server is online:', isOnline);
 
+            // Set the status message based on server status
+            statusElement.textContent = isOnline ? 'Server is online' : 'Server is offline';
+
             // Set day/night background based on server status
             setDayNightBackground(isOnline);
 
