@@ -52,6 +52,7 @@ h1 {
     animation: fadeInUp 2.5s forwards, slideIn 2.5s forwards; /* Fade in and slide*/
 }
 
+
 /* Keyframes*/
 
 @keyframes fadeInUp {
