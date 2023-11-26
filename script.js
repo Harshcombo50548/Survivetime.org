@@ -1,72 +1,75 @@
-// Function to move the background down
-function moveBackgroundDown() {
-    const dayBackground = document.getElementById('dayBackground');
-    const nightBackground = document.getElementById('nightBackground');
+/* styles.css */
 
-    dayBackground.style.animation = 'moveDown 1s forwards';
-    nightBackground.style.animation = 'moveDown 1s forwards';
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
 }
 
-// Function to check server status
-function checkServerStatus() {
-    const ipAddress = 'Survivetime.org'; // Domain
-    const apiUrl = `https://api.mcsrvstat.us/2/${ipAddress}`;
-    const statusElement = document.getElementById('status');
-    const loader = document.getElementById('loader');
-    const dayBackground = document.getElementById('dayBackground');
-    const nightBackground = document.getElementById('nightBackground');
-
-    // Display loader while checking server status
-    loader.style.display = 'inline-block';
-
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Server not reachable');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const isOnline = data.online || false;
-
-            console.log('Server is online:', isOnline);
-
-            // Set the status message based on server status
-            statusElement.textContent = isOnline ? 'Server is online' : 'Server is offline';
-
-            // Set day/night background based on server status
-            if (isOnline) {
-                console.log('Server is online. Showing day background.');
-                nightBackground.style.display = 'none';
-                dayBackground.style.display = 'block';
-            } else {
-                console.log('Server is offline. Showing night background.');
-                dayBackground.style.display = 'none';
-                nightBackground.style.display = 'block';
-            }
-
-            // Move background down if the server is online
-            if (isOnline) {
-                moveBackgroundDown();
-            }
-
-            // Hide loader after checking server status
-            loader.style.display = 'none';
-        })
-        .catch(error => {
-            console.error(error);
-            statusElement.textContent = 'Error checking server status';
-
-            // Hide loader in case of an error
-            loader.style.display = 'none';
-        });
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    margin-top: -20%;
+    opacity: 0; 
+    animation: fadeInUp 1.5s forwards; /* Fade in */
 }
 
-// Initial background check on page load
-checkServerStatus();
+#background {
+    position: fixed;
+    bottom: -50%; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0; 
+    animation: fadeInUp 1.5s forwards, glideUp 2s forwards; /* Fade in and glide */
+}
 
-// Subsequent background checks every 5 seconds
-setInterval(() => {
-    console.log('Checking server status...');
-    checkServerStatus();
-}, 5000);
+
+
+#grass {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#cow {
+    position: absolute;
+    bottom: 27.4%;
+    right: -20%; /* !!!!!!!!!!!!Start Cow From more right!!!!!!!!!!!!!!!!!!!*/
+    width: 200px; 
+    height: auto;
+    display: block;
+    z-index: -2;
+    opacity: 0; 
+    animation: fadeInUp 2.5s forwards, slideIn 2.5s forwards; /* Fade in and slide*/
+}
+
+/* Keyframes*/
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glideUp {
+    to {
+        bottom: 0;
+    }
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(-100%); /*how far cow moves*/
+    }
+}
