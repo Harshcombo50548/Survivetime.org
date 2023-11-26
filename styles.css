@@ -21,17 +21,39 @@ h1 {
     animation: fadeInUp 1.5s forwards; /* Fade in */
 }
 
-#background {
+#grass {
     position: fixed;
     bottom: -50%; 
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
     opacity: 0; 
-    animation: fadeInUp 1.5s forwards, glideUp 2s forwards; /* Fade in and glide */
+    animation: fadeInUp 0s forwards, glideUp 0s forwards; /* Fade in and glide */
 }
 
+#daybackground {
+    position: fixed;
+    bottom: 0%; 
+    right: 0%;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 1; 
+    object-fit: cover;
+}
+
+#nightbackground {
+    position: fixed;
+    bottom: 0%; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    opacity: 1;
+    object-fit: cover;
+    
+}
 
 
 #grass {
@@ -47,10 +69,84 @@ h1 {
     width: 200px; 
     height: auto;
     display: block;
-    z-index: -2;
+    z-index: -1;
     opacity: 0; 
     animation: fadeInUp 2.5s forwards, slideIn 2.5s forwards; /* Fade in and slide*/
 }
+
+#golem {
+    position: absolute;
+    bottom: 28.3%;
+    right: -20%;
+    width: 200px;
+    height: auto;
+    display: block;
+    z-index: -2;
+    opacity: 1;
+}
+
+#penguin1 {
+    position: absolute;
+    bottom: 28.3%;
+    right: 13%;
+    width: 200px;
+    height: auto;
+    display: block;
+    z-index: -1;
+    opacity: 1;
+}
+
+#penguin2 {
+    position: absolute;
+    bottom: 28.3%;
+    right: 30%;
+    width: 200px;
+    height: auto;
+    display: block;
+    z-index: -1;
+    opacity: 1;
+}
+
+#sniffer {
+    position: absolute;
+    bottom: 28.3%;
+    right: 49%;
+    width: 200px;
+    height: auto;
+    display: block;
+    z-index: -2;
+    opacity: 1;
+}
+
+#traveler {
+    position: absolute;
+    bottom: 28.3%;
+    right: 70%;
+    width: 200px;
+    height: auto;
+    display: block;
+    z-index: -2;
+    opacity: 1;
+    transform: scaleX(-1);
+
+    
+}
+
+#ghast {
+    position: absolute;
+    bottom: 55.3%;
+    right: 100%;
+    width: 300px;
+    height: auto;
+    display: block;
+    z-index: -2;
+    opacity: 1;
+    
+    
+    animation: moveRightLeft 60s linear infinite;
+}
+
+
 
 
 /* Keyframes*/
@@ -73,4 +169,26 @@ h1 {
         opacity: 1;
         transform: translateX(-100%); /*how far cow moves*/
     }
+}
+
+@keyframes moveRightLeft {
+    0%, 100% {
+        transform: translateX(0) scaleX(-1);
+    }
+    20% {
+        transform: translateX(900%) scaleX(-1);
+    }
+    40% {
+        transform: translateX(900%) scaleX(1);
+    }
+    60% {
+        transform: translateX(900%) scaleX(1);
+    }
+    80% {
+        transform: translateX(0) scaleX(1);
+    }
+}
+
+@keyframes moveRight {
+    
 }
