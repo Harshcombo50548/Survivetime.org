@@ -1,7 +1,29 @@
 // script.js
+let previousStatus = null; // Variable to store the previous server status
+
 function moveBackgroundDown() {
     const background = document.getElementById('background');
     background.style.animation = 'moveDown 1s forwards';
+}
+
+function showDayOnline() {
+    const dayOnline = document.getElementById('Day/Online');
+    dayOnline.style.display = 'block';
+}
+
+function showNightOffline() {
+    const nightOffline = document.getElementById('night/offline');
+    nightOffline.style.display = 'block';
+}
+
+function hideDayOnline() {
+    const dayOnline = document.getElementById('Day/Online');
+    dayOnline.style.display = 'none';
+}
+
+function hideNightOffline() {
+    const nightOffline = document.getElementById('night/offline');
+    nightOffline.style.display = 'none';
 }
 
 function checkServerStatus() {
@@ -22,7 +44,21 @@ function checkServerStatus() {
             }
         })
         .then(data => {
-            statusElement.textContent = data.online ? 'Server is online' : 'Server is offline';
+            if (data.online) {
+                statusElement.textContent = 'Server is online';
+                if (previousStatus !== true) {
+                    showDayOnline();
+                    hideNightOffline();
+                }
+                previousStatus = true;
+            } else {
+                statusElement.textContent = 'Server is offline';
+                if (previousStatus !== false) {
+                    showNightOffline();
+                    hideDayOnline();
+                }
+                previousStatus = false;
+            }
         })
         .catch(error => {
             console.error(error);
