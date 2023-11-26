@@ -2,7 +2,9 @@
 function moveBackgroundDown() {
     const dayBackground = document.getElementById('dayBackground');
     const nightBackground = document.getElementById('nightBackground');
-
+    
+    dayBackground.style.animation = 'moveDown 1s forwards';
+    nightBackground.style.animation = 'moveDown 1s forwards';
 
 }
 
